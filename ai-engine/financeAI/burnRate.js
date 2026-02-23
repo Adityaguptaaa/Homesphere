@@ -1,1 +1,0 @@
-// Burn rate placeholder
