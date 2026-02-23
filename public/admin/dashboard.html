@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeSphere - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar Navigation -->
+        <aside
+            class="w-64 bg-gray-900 bg-opacity-50 backdrop-blur-xl shadow-2xl fixed left-0 top-0 bottom-0 overflow-y-auto border-r border-purple-500 border-opacity-20">
+            <div class="p-6">
+                <h1
+                    class="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                    HomeSphere
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">Admin Control Center</p>
+            </div>
+
+            <nav class="px-4 space-y-2">
+                <a href="dashboard.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="analytics.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="users.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+                <a href="helpers.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Helpers</span>
+                </a>
+                <a href="bookings.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Bookings</span>
+                </a>
+
+                <a href="safety.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Safety Monitor</span>
+                </a>
+                <a href="finance.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-rupee-sign"></i>
+                    <span>Finance</span>
+                </a>
+                <a href="complaints.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-800 hover:bg-opacity-50 transition-all">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Complaints</span>
+                </a>
+                
+            </nav>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 ml-64 overflow-y-auto">
+
+            <!-- Top Navbar -->
+            <header
+                class="bg-gray-900 bg-opacity-50 backdrop-blur-xl shadow-2xl sticky top-0 z-10 border-b border-purple-500 border-opacity-20">
+                <div class="flex items-center justify-between px-8 py-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Platform Analytics</h2>
+                        <p class="text-sm text-gray-400">Real-time business intelligence</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <!-- Date Range Selector -->
+                        <select
+                            class="bg-gray-800 bg-opacity-50 text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <option>Last 7 Days</option>
+                            <option>Last 30 Days</option>
+                            <option>Last 90 Days</option>
+                            <option>This Year</option>
+                        </select>
+
+                        <!-- Notifications -->
+                        <button class="relative p-2 text-gray-400 hover:bg-gray-800 hover:bg-opacity-50 rounded-lg">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+
+                        <!-- Admin Profile -->
+                        <div class="flex items-center space-x-3">
+                            <img src="https://ui-avatars.com/api/?name=Admin+User&background=8b5cf6&color=fff"
+                                alt="Admin" class="w-10 h-10 rounded-full border-2 border-purple-500">
+                            <div class="text-left">
+                                <p class="text-sm font-semibold text-white">Admin</p>
+                                <p class="text-xs text-gray-400">Super Admin</p>
+                            </div>
+                        </div>
+                        <button onclick="firebaseAuth.signOut().then(() => window.location.href = '../login.html')"
+                            class="p-2 text-red-400 hover:bg-gray-700 rounded-lg" title="Logout">
+                            <i class="fas fa-sign-out-alt text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-8">
+
+                <!-- Top KPI Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+                    <!-- Total Bookings Card -->
+                    <div
+                        class="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl shadow-2xl p-6 text-white transform hover:scale-105 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-calendar-check text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs opacity-80">+12.5%</p>
+                            </div>
+                        </div>
+                        <h3 class="text-sm opacity-90 mb-1">Total Bookings</h3>
+                        <p id="totalBookingsVal" class="text-4xl font-bold mb-2">0</p>
+                        <p class="text-xs opacity-80">
+                            <i class="fas fa-arrow-up"></i> 1,243 this month
+                        </p>
+                    </div>
+
+                    <!-- Revenue Card -->
+                    <div
+                        class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-2xl p-6 text-white transform hover:scale-105 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-rupee-sign text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs opacity-80">+18.2%</p>
+                            </div>
+                        </div>
+                        <h3 class="text-sm opacity-90 mb-1">Total Revenue</h3>
+                        <p id="totalRevenueVal" class="text-4xl font-bold mb-2">₹0</p>
+                        <p class="text-xs opacity-80">
+                            <i class="fas fa-arrow-up"></i> ₹4.2L this month
+                        </p>
+                    </div>
+
+                    <!-- Active Users Card -->
+                    <div
+                        class="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl shadow-2xl p-6 text-white transform hover:scale-105 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-users text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs opacity-80">+8.3%</p>
+                            </div>
+                        </div>
+                        <h3 class="text-sm opacity-90 mb-1">Active Users</h3>
+                        <p id="activeUsersVal" class="text-4xl font-bold mb-2">0</p>
+                        <p class="text-xs opacity-80">
+                            <i class="fas fa-user-plus"></i> <span id="helpersCountVal">0</span> helpers
+                        </p>
+                    </div>
+
+                    <!-- Cancellation Rate Card -->
+                    <div
+                        class="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl shadow-2xl p-6 text-white transform hover:scale-105 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-times-circle text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs opacity-80">-2.1%</p>
+                            </div>
+                        </div>
+                        <h3 class="text-sm opacity-90 mb-1">Cancellation Rate</h3>
+                        <p id="cancellationRateVal" class="text-4xl font-bold mb-2">0%</p>
+                        <p class="text-xs opacity-80">
+                            <i class="fas fa-arrow-down"></i> Improved from last month
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+
+                    <!-- Revenue Line Chart -->
+                    <div
+                        class="lg:col-span-2 bg-gray-900 bg-opacity-50 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-purple-500 border-opacity-20">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Revenue Trend</h3>
+                                <p class="text-sm text-gray-400">Monthly performance overview</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm">Monthly</button>
+                                <button
+                                    class="px-4 py-2 bg-gray-800 bg-opacity-50 text-gray-400 rounded-lg text-sm">Quarterly</button>
+                            </div>
+                        </div>
+                        <canvas id="revenueChart" height="80"></canvas>
+                    </div>
+
+                    <!-- Service Distribution Donut Chart -->
+                    <div
+                        class="bg-gray-900 bg-opacity-50 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-purple-500 border-opacity-20">
+                        <h3 class="text-xl font-bold text-white mb-1">Service Distribution</h3>
+                        <p class="text-sm text-gray-400 mb-6">By category</p>
+                        <canvas id="serviceChart"></canvas>
+                        <div class="mt-6 space-y-2">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                                    <span class="text-gray-300">Cleaning</span>
+                                </div>
+                                <span class="text-white font-semibold">38%</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+                                    <span class="text-gray-300">Repair</span>
+                                </div>
+                                <span class="text-white font-semibold">27%</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                    <span class="text-gray-300">Plumbing</span>
+                                </div>
+                                <span class="text-white font-semibold">20%</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-cyan-500 rounded-full"></div>
+                                    <span class="text-gray-300">Electrical</span>
+                                </div>
+                                <span class="text-white font-semibold">15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Recent Bookings Section -->
+                <div
+                    class="bg-gray-900 bg-opacity-50 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-purple-500 border-opacity-20 mt-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">Recent Bookings</h3>
+                            <p class="text-sm text-gray-400">Latest platform activity</p>
+                        </div>
+                        <button onclick="loadPlatformStats()"
+                            class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm hover:bg-purple-700 transition-colors">
+                            <i class="fas fa-sync-alt mr-2"></i>Refresh
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-gray-300">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-700 text-sm uppercase tracking-wider">
+                                    <th class="pb-4 pl-4 font-semibold">Service</th>
+                                    <th class="pb-4 font-semibold">User</th>
+                                    <th class="pb-4 font-semibold">Helper</th>
+                                    <th class="pb-4 font-semibold">Status</th>
+                                    <th class="pb-4 font-semibold">Amount</th>
+                                    <th class="pb-4 pr-4 font-semibold text-right">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentBookingsBody" class="divide-y divide-gray-700">
+                                <!-- Dynamic Content -->
+                                <tr>
+                                    <td colspan="6" class="py-12 text-center text-gray-500">
+                                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                                        <p class="mt-2">Loading recent bookings...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+
+</body>
+
+</html>

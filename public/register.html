@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - HomeSphere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body
+    class="bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-2xl">
+        <!-- Logo Section -->
+        <div class="text-center mb-8">
+            <h1
+                class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                HomeSphere
+            </h1>
+            <p class="text-gray-600">Join the 15-Min Smart Service Revolution</p>
+        </div>
+
+        <!-- Register Card -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Create Your Account</h2>
+
+            <!-- Role Selection Tabs -->
+            <div class="flex space-x-2 mb-6 bg-gray-100 p-1 rounded-xl">
+                <button onclick="selectTab('user')" id="userTab"
+                    class="flex-1 py-2 rounded-lg font-semibold transition-all bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                    <i class="fas fa-user mr-2"></i>User
+                </button>
+                <button onclick="selectTab('helper')" id="helperTab"
+                    class="flex-1 py-2 rounded-lg font-semibold transition-all text-gray-600">
+                    <i class="fas fa-hands-helping mr-2"></i>Helper
+                </button>
+            </div>
+
+            <form id="registerForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- First Name -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+                        <input type="text" id="firstName" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="FirstName">
+                    </div>
+
+                    <!-- Last Name -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+                        <input type="text" id="lastName" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="LastName">
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" id="email" required
+                            class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="Email">
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                    <div class="relative">
+                        <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="tel" id="phone" required
+                            class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="+91 12345 67890">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Password -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="password" id="password" required
+                                class="w-full pl-12 pr-12 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('password')"
+                                class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="password" id="confirmPassword" required
+                                class="w-full pl-12 pr-12 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('confirmPassword')"
+                                class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Helper-specific fields -->
+                <div id="helperFields" class="hidden space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Service Category</label>
+                        <select id="serviceCategory"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option>Cleaning Services</option>
+                            <option>Plumbing</option>
+                            <option>Electrical Work</option>
+                            <option>AC Repair</option>
+                            <option>Painting</option>
+                            <option>Carpentry</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Years of Experience</label>
+                        <input type="number" id="experience" min="0" max="50"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="5">
+                    </div>
+
+                    <!-- Aadhar Verification Section -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border-2 border-indigo-200">
+                        <label class="block text-sm font-bold text-indigo-700 mb-2">
+                            <i class="fas fa-id-card mr-2"></i>Aadhar Card Verification (Required)
+                        </label>
+                        <p class="text-xs text-gray-600 mb-3">
+                            Upload your Aadhar card for instant verification. We use OCR to auto-extract details.
+                        </p>
+
+                        <input type="file" id="aadharUpload" accept="image/*" onchange="handleAadharUpload(event)"
+                            class="w-full px-4 py-3 rounded-xl border-2 border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+
+                        <!-- Preview Area -->
+                        <div id="aadharPreview" class="hidden mt-3">
+                            <img id="aadharImage"
+                                class="w-full rounded-lg border-2 border-indigo-200 max-h-48 object-contain">
+                            <div class="mt-2 flex items-center justify-between bg-white rounded-lg p-3">
+                                <div>
+                                    <p class="text-xs text-gray-500">Extracted Aadhar Number:</p>
+                                    <p id="extractedAadhar" class="text-sm font-mono font-bold text-indigo-600">
+                                        Extracting...</p>
+                                </div>
+                                <div id="aadharStatus" class="text-xs">
+                                    <i class="fas fa-spinner fa-spin text-indigo-600"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Manual Entry Fallback -->
+                        <div class="mt-3">
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Or Enter Manually (12
+                                digits)</label>
+                            <input type="text" id="aadharNumber" maxlength="12" pattern="[0-9]{12}"
+                                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                                placeholder="xxxx xxxx xxxx">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms & Conditions -->
+                <div class="flex items-start">
+                    <input type="checkbox" required class="w-4 h-4 mt-1 text-indigo-600 rounded focus:ring-indigo-500">
+                    <label class="ml-2 text-sm text-gray-600">
+                        I agree to the <a href="#" class="text-indigo-600 hover:underline">Terms & Conditions</a> and
+                        <a href="#" class="text-indigo-600 hover:underline">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <!-- Register Button -->
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-xl font-bold hover:shadow-lg transition-all transform hover:scale-105">
+                    Create Account
+                </button>
+
+                <!-- Divider -->
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-4 bg-white text-gray-500">Or sign up with</span>
+                    </div>
+                </div>
+
+                <!-- Social Signup -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button type="button"
+                        class="flex items-center justify-center space-x-2 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
+                        <i class="fab fa-google text-red-500"></i>
+                        <span class="text-sm font-semibold text-gray-700">Google</span>
+                    </button>
+                    <button type="button"
+                        class="flex items-center justify-center space-x-2 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
+                        <i class="fab fa-facebook text-blue-600"></i>
+                        <span class="text-sm font-semibold text-gray-700">Facebook</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Login Link -->
+            <p class="text-center text-sm text-gray-600 mt-6">
+                Already have an account?
+                <a href="login.html" class="text-indigo-600 font-semibold hover:underline">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Tesseract.js for OCR -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
+
+    <!-- Firebase Config -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        let selectedRole = 'user';
+        let aadharFile = null;
+        let extractedAadharNumber = null;
+
+        // Handle Aadhar Upload and OCR
+        async function handleAadharUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            aadharFile = file;
+            const preview = document.getElementById('aadharPreview');
+            const img = document.getElementById('aadharImage');
+            const status = document.getElementById('aadharStatus');
+            const extracted = document.getElementById('extractedAadhar');
+
+            // Show preview
+            preview.classList.remove('hidden');
+            img.src = URL.createObjectURL(file);
+
+            // Reset status
+            status.innerHTML = '<i class="fas fa-spinner fa-spin text-indigo-600"></i>';
+            extracted.textContent = 'Extracting...';
+
+            try {
+                // Run OCR
+                const result = await Tesseract.recognize(
+                    file,
+                    'eng',
+                    {
+                        logger: m => {
+                            if (m.status === 'recognizing text') {
+                                status.innerHTML = `<i class="fas fa-spinner fa-spin text-indigo-600"></i> ${Math.round(m.progress * 100)}%`;
+                            }
+                        }
+                    }
+                );
+
+                const text = result.data.text;
+                console.log('OCR Text:', text);
+
+                // Extract 12-digit Aadhar number
+                const aadharMatch = text.match(/\b[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\b/);
+
+                if (aadharMatch) {
+                    extractedAadharNumber = aadharMatch[0].replace(/\s/g, '');
+                    extracted.textContent = formatAadhar(extractedAadharNumber);
+                    document.getElementById('aadharNumber').value = extractedAadharNumber;
+                    status.innerHTML = '<i class="fas fa-check-circle text-green-600"></i>';
+                } else {
+                    extracted.textContent = 'Not found - Enter manually below';
+                    status.innerHTML = '<i class="fas fa-exclamation-triangle text-yellow-600"></i>';
+                }
+            } catch (error) {
+                console.error('OCR Error:', error);
+                extracted.textContent = 'Error - Enter manually below';
+                status.innerHTML = '<i class="fas fa-times-circle text-red-600"></i>';
+            }
+        }
+
+        function formatAadhar(number) {
+            return number.replace(/(\d{4})(\d{4})(\d{4})/, '$1 $2 $3');
+        }
+
+        function validateAadhar(number) {
+            // Remove spaces
+            const cleaned = number.replace(/\s/g, '');
+
+            // Check if 12 digits
+            if (!/^\d{12}$/.test(cleaned)) {
+                return { valid: false, error: 'Aadhar must be exactly 12 digits' };
+            }
+
+            // Verhoeff algorithm for Aadhar checksum
+            const d = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 0, 6, 7, 8, 9, 5], [2, 3, 4, 0, 1, 7, 8, 9, 5, 6], [3, 4, 0, 1, 2, 8, 9, 5, 6, 7], [4, 0, 1, 2, 3, 9, 5, 6, 7, 8], [5, 9, 8, 7, 6, 0, 4, 3, 2, 1], [6, 5, 9, 8, 7, 1, 0, 4, 3, 2], [7, 6, 5, 9, 8, 2, 1, 0, 4, 3], [8, 7, 6, 5, 9, 3, 2, 1, 0, 4], [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]];
+            const p = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 5, 7, 6, 2, 8, 3, 0, 9, 4], [5, 8, 0, 3, 7, 9, 6, 1, 4, 2], [8, 9, 1, 6, 0, 4, 3, 5, 2, 7], [9, 4, 5, 3, 1, 2, 6, 8, 7, 0], [4, 2, 8, 6, 5, 7, 3, 9, 0, 1], [2, 7, 9, 3, 8, 0, 6, 4, 1, 5], [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]];
+            let c = 0;
+            const myArray = cleaned.split('').reverse();
+            for (let i = 0; i < myArray.length; i++) {
+                c = d[c][p[((i + 1) % 8)][parseInt(myArray[i])]];
+            }
+
+            if (c === 0) {
+                return { valid: true };
+            } else {
+                return { valid: false, error: 'Invalid Aadhar checksum' };
+            }
+        }
+
+        function selectTab(role) {
+            selectedRole = role;
+            const userTab = document.getElementById('userTab');
+            const helperTab = document.getElementById('helperTab');
+            const helperFields = document.getElementById('helperFields');
+
+            if (role === 'user') {
+                userTab.className = 'flex-1 py-2 rounded-lg font-semibold transition-all bg-gradient-to-r from-indigo-600 to-purple-600 text-white';
+                helperTab.className = 'flex-1 py-2 rounded-lg font-semibold transition-all text-gray-600';
+                helperFields.classList.add('hidden');
+            } else {
+                helperTab.className = 'flex-1 py-2 rounded-lg font-semibold transition-all bg-gradient-to-r from-indigo-600 to-purple-600 text-white';
+                userTab.className = 'flex-1 py-2 rounded-lg font-semibold transition-all text-gray-600';
+                helperFields.classList.remove('hidden');
+            }
+        }
+
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.nextElementSibling.querySelector('i');
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Register with Firebase
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Get form values by ID
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('❌ Passwords do not match!');
+                return;
+            }
+
+            // Validate password strength
+            if (password.length < 6) {
+                alert('❌ Password must be at least 6 characters long');
+                return;
+            }
+
+            // Helper-specific validation
+            if (selectedRole === 'helper') {
+                const aadharNumber = document.getElementById('aadharNumber').value;
+
+                if (!aadharNumber) {
+                    alert('❌ Please upload Aadhar or enter the number manually');
+                    return;
+                }
+
+                const aadharValidation = validateAadhar(aadharNumber);
+                if (!aadharValidation.valid) {
+                    alert('❌ ' + aadharValidation.error);
+                    return;
+                }
+
+                if (!aadharFile) {
+                    alert('❌ Please upload your Aadhar card image');
+                    return;
+                }
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Account...';
+
+            try {
+                // Prepare user data
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    phone: phone,
+                    role: selectedRole
+                };
+
+                // If helper, add helper-specific data
+                if (selectedRole === 'helper') {
+                    const serviceCategory = document.getElementById('serviceCategory').value;
+                    const experience = document.getElementById('experience').value;
+                    const aadharNumber = document.getElementById('aadharNumber').value;
+
+                    userData.serviceCategory = serviceCategory;
+                    userData.experience = parseInt(experience) || 0;
+                    userData.aadharNumber = aadharNumber;
+                    userData.verificationStatus = 'pending'; // Will be verified by admin
+                    userData.verified = false;
+                }
+
+                console.log('📝 Registering user with data:', userData);
+
+                // Register user with Firebase
+                const result = await registerUser(email, password, userData);
+
+                if (result.success) {
+                    console.log('✅ Registration successful!', result.user);
+
+                    // Upload Aadhar if helper
+                    if (selectedRole === 'helper' && aadharFile) {
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading Aadhar...';
+
+                        try {
+                            const storage = firebase.storage();
+                            const storageRef = storage.ref();
+                            const aadharRef = storageRef.child(`aadhar/${result.user.uid}/${aadharFile.name}`);
+
+                            await aadharRef.put(aadharFile);
+                            const aadharURL = await aadharRef.getDownloadURL();
+
+                            // Save Aadhar URL to Firestore
+                            await firebase.firestore().collection('users').doc(result.user.uid).update({
+                                aadharImageURL: aadharURL,
+                                aadharUploadedAt: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+
+                            console.log('✅ Aadhar uploaded successfully');
+                        } catch (uploadError) {
+                            console.error('❌ Aadhar upload error:', uploadError);
+                            // Continue anyway - user is registered
+                        }
+                    }
+
+                    alert('✅ Registration successful! ' +
+                        (selectedRole === 'helper' ? 'Your Aadhar is under review. You\'ll be notified once verified.' : 'Please login with your credentials.'));
+                    window.location.href = 'login.html';
+                } else {
+                    console.error('❌ Registration failed:', result.error);
+                    alert('❌ Registration failed: ' + result.error);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Create Account';
+                }
+            } catch (error) {
+                console.error('❌ Registration error:', error);
+                alert('❌ An error occurred during registration: ' + error.message);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Create Account';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

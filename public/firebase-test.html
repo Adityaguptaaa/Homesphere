@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test - HomeSphere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">🔥 Firebase Connection Test</h1>
+
+        <div id="results" class="space-y-4">
+            <div class="p-4 bg-gray-50 rounded">
+                <p class="text-sm text-gray-600">Testing Firebase connection...</p>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <button onclick="runTests()"
+                class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-indigo-700">
+                Run Tests Again
+            </button>
+            <a href="login.html"
+                class="ml-4 bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 inline-block">
+                Go to Login
+            </a>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        function addResult(title, status, message, details = '') {
+            const resultsDiv = document.getElementById('results');
+            const statusColor = status === 'success' ? 'green' : status === 'warning' ? 'yellow' : 'red';
+            const statusIcon = status === 'success' ? '✅' : status === 'warning' ? '⚠️' : '❌';
+
+            const resultHTML = `
+                <div class="p-4 border-l-4 border-${statusColor}-500 bg-${statusColor}-50 rounded">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">${statusIcon}</span>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-800">${title}</h3>
+                            <p class="text-sm text-gray-600 mt-1">${message}</p>
+                            ${details ? `<pre class="text-xs bg-white p-2 rounded mt-2 overflow-auto">${details}</pre>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            resultsDiv.innerHTML += resultHTML;
+        }
+
+        async function runTests() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="p-4 bg-gray-50 rounded"><p class="text-sm text-gray-600">Running tests...</p></div>';
+
+            // Test 1: Firebase SDK
+            try {
+                if (typeof firebase !== 'undefined') {
+                    addResult('Firebase SDK', 'success', 'Firebase SDK loaded successfully', `Version: ${firebase.SDK_VERSION}`);
+                } else {
+                    addResult('Firebase SDK', 'error', 'Firebase SDK not loaded', 'Check if Firebase scripts are included');
+                    return;
+                }
+            } catch (error) {
+                addResult('Firebase SDK', 'error', 'Error checking Firebase SDK', error.message);
+                return;
+            }
+
+            // Test 2: Firebase Config
+            try {
+                if (typeof firebaseApp !== 'undefined' && firebaseApp) {
+                    addResult('Firebase Config', 'success', 'Firebase initialized successfully', `Project: ${firebaseApp.options.projectId}`);
+                } else {
+                    addResult('Firebase Config', 'error', 'Firebase not initialized', 'Check firebase-config.js');
+                    return;
+                }
+            } catch (error) {
+                addResult('Firebase Config', 'error', 'Error checking Firebase config', error.message);
+            }
+
+            // Test 3: Firebase Auth
+            try {
+                if (typeof firebaseAuth !== 'undefined' && firebaseAuth) {
+                    addResult('Firebase Auth', 'success', 'Firebase Authentication ready', `Auth Domain: ${firebaseApp.options.authDomain}`);
+                } else {
+                    addResult('Firebase Auth', 'error', 'Firebase Auth not initialized', 'Check firebase-config.js');
+                }
+            } catch (error) {
+                addResult('Firebase Auth', 'error', 'Error checking Firebase Auth', error.message);
+            }
+
+            // Test 4: Firebase Firestore
+            try {
+                if (typeof firebaseDB !== 'undefined' && firebaseDB) {
+                    addResult('Firebase Firestore', 'success', 'Firestore Database ready', 'Database connection established');
+                } else {
+                    addResult('Firebase Firestore', 'error', 'Firestore not initialized', 'Check firebase-config.js');
+                }
+            } catch (error) {
+                addResult('Firebase Firestore', 'error', 'Error checking Firestore', error.message);
+            }
+
+            // Test 5: Auth Functions
+            try {
+                if (typeof loginUser === 'function') {
+                    addResult('Auth Functions', 'success', 'Authentication functions loaded', 'loginUser, registerUser, etc. are available');
+                } else {
+                    addResult('Auth Functions', 'error', 'Auth functions not loaded', 'Check if auth.js is included');
+                }
+            } catch (error) {
+                addResult('Auth Functions', 'error', 'Error checking auth functions', error.message);
+            }
+
+            // Test 6: Current User
+            try {
+                const currentUser = firebaseAuth.currentUser;
+                if (currentUser) {
+                    addResult('Current User', 'success', 'User is logged in', `Email: ${currentUser.email}\nUID: ${currentUser.uid}`);
+                } else {
+                    addResult('Current User', 'warning', 'No user logged in', 'This is normal if you haven\'t logged in yet');
+                }
+            } catch (error) {
+                addResult('Current User', 'error', 'Error checking current user', error.message);
+            }
+
+            // Test 7: Try to get auth providers
+            try {
+                const providers = await firebaseAuth.fetchSignInMethodsForEmail('test@example.com');
+                if (providers.length > 0) {
+                    addResult('Test User Check', 'success', 'test@example.com exists in Firebase', `Sign-in methods: ${providers.join(', ')}`);
+                } else {
+                    addResult('Test User Check', 'warning', 'test@example.com not found', 'Register this user through register.html to test login');
+                }
+            } catch (error) {
+                if (error.code === 'auth/configuration-not-found') {
+                    addResult('Authentication Setup', 'error', 'Email/Password authentication not enabled', 'Go to Firebase Console → Authentication → Sign-in method → Enable Email/Password');
+                } else {
+                    addResult('Test User Check', 'warning', 'Could not check for test user', error.message);
+                }
+            }
+
+            // Summary
+            addResult('Test Complete', 'success', 'All tests finished', 'Check results above. If you see any errors, follow the instructions to fix them.');
+        }
+
+        // Run tests on page load
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+
+</html>

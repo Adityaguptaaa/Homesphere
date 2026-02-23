@@ -1,0 +1,1 @@
+// Booking extractor placeholder

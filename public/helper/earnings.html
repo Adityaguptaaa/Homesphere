@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeSphere - Helper Earnings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-900 text-white">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 shadow-2xl fixed left-0 top-0 bottom-0 overflow-y-auto border-r border-gray-700">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    HomeSphere</h1>
+                <p class="text-xs text-gray-400 mt-1">Helper Portal</p>
+            </div>
+            <nav class="px-4 space-y-2">
+                <a href="dashboard.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-700 transition-all">
+                    <i class="fas fa-home"></i><span>Dashboard</span>
+                </a>
+                <a href="jobs.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-700 transition-all">
+                    <i class="fas fa-tasks"></i><span>My Jobs</span>
+                </a>
+                <a href="earnings.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg transition-all">
+                    <i class="fas fa-wallet"></i><span>Earnings</span>
+                </a>
+                <a href="performance.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-700 transition-all">
+                    <i class="fas fa-chart-line"></i><span>Performance</span>
+                </a>
+                <a href="payout.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-700 transition-all">
+                    <i class="fas fa-money-bill-wave"></i><span>Payouts</span>
+                </a>
+                <a href="profile.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-700 transition-all">
+                    <i class="fas fa-user-circle"></i><span>Profile</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 ml-64 p-8 overflow-y-auto">
+            <h1 class="text-3xl font-bold mb-6 text-white">Earnings & Payouts</h1>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="flex flex-col justify-center items-center py-32 hidden">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
+                <p class="text-gray-500">Calculating your earnings...</p>
+            </div>
+
+            <!-- Content -->
+            <div id="contentState" class="hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div
+                        class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-gray-700 shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl">
+                        </div>
+                        <h2 class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-2">Total Earnings
+                        </h2>
+                        <div class="flex items-baseline space-x-2">
+                            <span id="totalEarnings" class="text-4xl font-bold text-white">₹0</span>
+                            <span class="text-green-500 text-sm font-medium"><i
+                                    class="fas fa-arrow-up mr-1"></i>+12%</span>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-4">Calculated from completed jobs minus platform fees.</p>
+                    </div>
+
+                    <div
+                        class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-gray-700 shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-purple-500/10 rounded-full blur-xl">
+                        </div>
+                        <h2 class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-2">Pending Payout
+                        </h2>
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-4xl font-bold text-white">₹0</span>
+                            <span class="text-gray-500 text-sm">Processing</span>
+                        </div>
+                        <button class="mt-4 text-cyan-400 hover:text-cyan-300 text-sm font-semibold transition-colors">
+                            Request Payout <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-history mr-2 text-gray-500"></i> Transaction History
+                </h3>
+
+                <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-gray-700/50 text-gray-400 uppercase text-xs font-semibold tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4">Service</th>
+                                    <th class="px-6 py-4">Date</th>
+                                    <th class="px-6 py-4">Customer</th>
+                                    <th class="px-6 py-4 text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="earningsTableBody" class="divide-y divide-gray-700 text-gray-300">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/helper-sidebar.js"></script>
+    <script src="../js/helper-earnings.js"></script>
+</body>
+
+</html>

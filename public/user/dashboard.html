@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeSphere - User Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white shadow-lg fixed left-0 top-0 bottom-0 overflow-y-auto">
+            <div class="p-6">
+                <h1
+                    class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    HomeSphere
+                </h1>
+                <p class="text-xs text-gray-500 mt-1">15-Min Smart Service</p>
+            </div>
+
+            <nav class="px-4 space-y-2">
+                <a href="dashboard.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="booking.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>My Bookings</span>
+                </a>
+                <a href="wallet.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-wallet"></i>
+                    <span>Wallet</span>
+                </a>
+                <a href="subscription.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-crown"></i>
+                    <span>Subscription</span>
+                </a>
+
+                <a href="safety.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 border-t border-gray-200 mt-2 pt-4">
+                    <i class="fas fa-shield-alt text-red-500"></i>
+                    <span>Safety Center</span>
+                </a>
+
+                <a href="chatbot.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-headset"></i>
+                    <span>Support</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 ml-64 overflow-y-auto">
+
+            <!-- Top Navbar -->
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-8 py-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Welcome Back, Sarah!</h2>
+                        <p class="text-sm text-gray-500">Your home services at your fingertips</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <!-- Notifications -->
+                        <button class="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+
+                        <!-- Profile Dropdown -->
+                        <div class="relative">
+                            <button onclick="toggleDropdown()"
+                                class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=6366f1&color=fff"
+                                    alt="Profile" class="w-10 h-10 rounded-full">
+                                <div class="text-left">
+                                    <p class="text-sm font-semibold text-gray-800">Sarah Johnson</p>
+                                    <p class="text-xs text-gray-500">Premium Member</p>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div id="profileDropdown"
+                                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg py-2">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-2"></i> Profile
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-cog mr-2"></i> Settings
+                                </a>
+                                <hr class="my-2">
+                                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="p-8">
+
+                <!-- Quick Action Button -->
+                <div class="mb-8">
+                    <button onclick="window.location.href='booking.html'"
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                        <i class="fas fa-plus-circle text-2xl mb-2"></i>
+                        <p class="text-xl font-bold">Book New Service</p>
+                        <p class="text-sm opacity-90">Get help in 15 minutes</p>
+                    </button>
+                </div>
+
+                <!-- Top Analytics Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+                    <!-- Active Booking Card -->
+                    <div id="activeBookingCard"
+                        class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-clock text-3xl opacity-80"></i>
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs font-semibold">
+                                In Progress
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-1">Active Booking</h3>
+                        <p class="text-sm opacity-90">Deep Cleaning</p>
+                        <div class="mt-4 pt-4 border-t border-white border-opacity-20">
+                            <p class="text-xs opacity-80">ETA: 12 minutes</p>
+                            <div class="w-full bg-white bg-opacity-20 rounded-full h-2 mt-2">
+                                <div class="bg-white h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wallet Balance Card -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-wallet text-3xl text-green-500"></i>
+                            <button class="text-indigo-600 text-sm font-semibold hover:underline"
+                                onclick="window.location.href='wallet.html'">Add Money</button>
+                        </div>
+                        <h3 class="text-gray-500 text-sm mb-1">Wallet Balance</h3>
+                        <p class="text-3xl font-bold text-gray-800">₹1,245</p>
+                        <p class="text-xs text-green-600 mt-2">
+                            <i class="fas fa-arrow-up"></i> ₹200 cashback available
+                        </p>
+                    </div>
+
+                    <!-- Subscription Card -->
+                    <div class="bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl shadow-lg p-6 text-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-crown text-3xl opacity-80"></i>
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs font-semibold">
+                                Active
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-1">Premium Plan</h3>
+                        <p class="text-sm opacity-90">Valid till Dec 2024</p>
+                        <div class="mt-4 pt-4 border-t border-white border-opacity-20">
+                            <p class="text-xs opacity-80">12 services remaining</p>
+                        </div>
+                    </div>
+
+                    <!-- Total Bookings Card -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas fa-chart-line text-3xl text-indigo-500"></i>
+                        </div>
+                        <h3 class="text-gray-500 text-sm mb-1">Total Bookings</h3>
+                        <p class="text-3xl font-bold text-gray-800">47</p>
+                        <p class="text-xs text-gray-600 mt-2">
+                            <i class="fas fa-calendar"></i> This month: 8
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Booking History Section -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-800">Recent Bookings</h3>
+                        <a href="booking.html" class="text-indigo-600 text-sm font-semibold hover:underline">View
+                            All</a>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 px-4 text-sm font-semibold text-gray-600">Service</th>
+                                    <th class="text-left py-3 px-4 text-sm font-semibold text-gray-600">Helper</th>
+                                    <th class="text-left py-3 px-4 text-sm font-semibold text-gray-600">Date</th>
+                                    <th class="text-left py-3 px-4 text-sm font-semibold text-gray-600">Amount</th>
+                                    <th class="text-left py-3 px-4 text-sm font-semibold text-gray-600">Status</th>
+                                    <th class="text-left py-3 px-4 text-sm font-semibold text-gray-600">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-broom text-indigo-600"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-gray-800">Deep Cleaning</p>
+                                                <p class="text-xs text-gray-500">2 hours</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=random"
+                                                class="w-8 h-8 rounded-full" alt="Helper">
+                                            <span class="text-sm text-gray-700">Rajesh Kumar</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-gray-600">Today, 2:30 PM</td>
+                                    <td class="py-4 px-4 font-semibold text-gray-800">₹899</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
+                                            In Progress
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <button class="text-indigo-600 hover:text-indigo-800">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-wrench text-green-600"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-gray-800">AC Repair</p>
+                                                <p class="text-xs text-gray-500">1 hour</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://ui-avatars.com/api/?name=Amit+Shah&background=random"
+                                                class="w-8 h-8 rounded-full" alt="Helper">
+                                            <span class="text-sm text-gray-700">Amit Shah</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-gray-600">Feb 10, 11:00 AM</td>
+                                    <td class="py-4 px-4 font-semibold text-gray-800">₹649</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                                            Completed
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <button class="text-indigo-600 hover:text-indigo-800">
+                                            <i class="fas fa-star"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                                <i class="fas fa-toilet text-purple-600"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-gray-800">Plumbing</p>
+                                                <p class="text-xs text-gray-500">45 mins</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://ui-avatars.com/api/?name=Suresh+Patel&background=random"
+                                                class="w-8 h-8 rounded-full" alt="Helper">
+                                            <span class="text-sm text-gray-700">Suresh Patel</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-gray-600">Feb 8, 4:15 PM</td>
+                                    <td class="py-4 px-4 font-semibold text-gray-800">₹499</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                                            Completed
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <button class="text-indigo-600 hover:text-indigo-800">
+                                            <i class="fas fa-star"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Floating Chatbot Button -->
+    <button onclick="toggleChatbot()"
+        class="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 flex items-center justify-center">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </button>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Book New Service</h3>
+                <button onclick="closeBookingModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="bookingForm" class="space-y-4">
+                <!-- Service Selection -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Select Service *</label>
+                    <select id="serviceSelect" required onchange="updateBookingPrice()"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="">Choose a service...</option>
+                    </select>
+                </div>
+
+                <!-- Date & Time -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
+                        <input type="date" id="bookingDate" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Time *</label>
+                        <input type="time" id="bookingTime" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                    <input type="tel" id="bookingPhone" required
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="+91 98765 43210">
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Service Address *</label>
+                    <textarea id="bookingAddress" rows="3" required
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Enter your complete address with landmark"></textarea>
+                </div>
+
+                <!-- Additional Notes -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Additional Notes (Optional)</label>
+                    <textarea id="bookingNotes" rows="2"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Any special instructions or requirements"></textarea>
+                </div>
+
+                <!-- Price Summary -->
+                <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 border border-gray-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">Service Fee</span>
+                        <span class="font-semibold" id="serviceFee">₹0</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">Platform Fee</span>
+                        <span class="font-semibold">₹50</span>
+                    </div>
+                    <hr class="my-2 border-gray-300">
+                    <div class="flex justify-between items-center text-lg font-bold">
+                        <span>Total Amount</span>
+                        <span class="text-indigo-600" id="totalAmount">₹50</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">
+                        <i class="fas fa-info-circle"></i> Payment will be collected after service completion
+                    </p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="confirmBookingBtn"
+                    class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all transform hover:scale-105">
+                    <i class="fas fa-check-circle mr-2"></i>Confirm Booking
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Profile Dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function (e) {
+            if (!e.target.closest('.relative')) {
+                document.getElementById('profileDropdown').classList.add('hidden');
+            }
+        });
+
+        // Toggle Chatbot
+        function toggleChatbot() {
+            alert('Chatbot feature coming soon! 🤖');
+        }
+
+        // Open Booking Modal
+        function openBookingModal() {
+            loadServicesIntoModal();
+            setMinDateTime();
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        // Close Booking Modal
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+            document.getElementById('bookingForm').reset();
+            updateBookingPrice();
+        }
+
+        // Load services into modal dropdown
+        function loadServicesIntoModal() {
+            const serviceSelect = document.getElementById('serviceSelect');
+            serviceSelect.innerHTML = '<option value="">Choose a service...</option>';
+
+            SERVICES.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = `${service.name} - ₹${service.price} (${service.duration})`;
+                option.dataset.price = service.price;
+                option.dataset.name = service.name;
+                option.dataset.duration = service.duration;
+                option.dataset.category = service.category;
+                serviceSelect.appendChild(option);
+            });
+        }
+
+        // Set minimum date/time to current date/time
+        function setMinDateTime() {
+            const now = new Date();
+            const dateInput = document.getElementById('bookingDate');
+            const timeInput = document.getElementById('bookingTime');
+
+            // Set min date to today
+            const today = now.toISOString().split('T')[0];
+            dateInput.min = today;
+            dateInput.value = today;
+
+            // Set default time to current time + 2 hours
+            now.setHours(now.getHours() + 2);
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+        }
+
+        // Update booking price when service changes
+        function updateBookingPrice() {
+            const serviceSelect = document.getElementById('serviceSelect');
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+
+            if (selectedOption.value) {
+                const servicePrice = parseInt(selectedOption.dataset.price);
+                const platformFee = 50;
+                const total = servicePrice + platformFee;
+
+                document.getElementById('serviceFee').textContent = `₹${servicePrice}`;
+                document.getElementById('totalAmount').textContent = `₹${total}`;
+            } else {
+                document.getElementById('serviceFee').textContent = '₹0';
+                document.getElementById('totalAmount').textContent = '₹50';
+            }
+        }
+
+        // Handle booking form submission
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookingForm = document.getElementById('bookingForm');
+
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = document.getElementById('confirmBookingBtn');
+                    const originalText = submitBtn.innerHTML;
+
+                    try {
+                        // Disable button and show loading
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Booking...';
+
+                        // Get form data
+                        const serviceSelect = document.getElementById('serviceSelect');
+                        const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+
+                        if (!selectedOption.value) {
+                            throw new Error('Please select a service');
+                        }
+
+                        const bookingDate = document.getElementById('bookingDate').value;
+                        const bookingTime = document.getElementById('bookingTime').value;
+                        const scheduledDateTime = new Date(`${bookingDate}T${bookingTime}`);
+
+                        // Validate date is in future
+                        if (scheduledDateTime <= new Date()) {
+                            throw new Error('Please select a future date and time');
+                        }
+
+                        const bookingData = {
+                            serviceId: selectedOption.value,
+                            serviceName: selectedOption.dataset.name,
+                            category: selectedOption.dataset.category,
+                            amount: parseInt(selectedOption.dataset.price) + 50, // Include platform fee
+                            duration: selectedOption.dataset.duration,
+                            scheduledDate: scheduledDateTime,
+                            phone: document.getElementById('bookingPhone').value,
+                            address: document.getElementById('bookingAddress').value,
+                            notes: document.getElementById('bookingNotes').value
+                        };
+
+                        console.log('📝 Submitting booking:', bookingData);
+
+                        // Create booking
+                        const result = await createBooking(bookingData);
+
+                        if (result.success) {
+                            // Show success message
+                            alert('🎉 Booking created successfully!\n\nBooking ID: ' + result.bookingId + '\n\nYou will be notified once a helper is assigned.');
+
+                            // Close modal and reset form
+                            closeBookingModal();
+
+                            // Reload dashboard data
+                            if (currentUser) {
+                                await loadUserData(currentUser.uid);
+                            }
+                        } else {
+                            throw new Error(result.error || 'Failed to create booking');
+                        }
+
+                    } catch (error) {
+                        console.error('❌ Booking error:', error);
+                        alert('Error creating booking: ' + error.message);
+                    } finally {
+                        // Re-enable button
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/services.js"></script>
+    <script src="../js/booking.js"></script>
+
+    <script>
+        let currentUser = null;
+        let userData = null;
+
+        // Logout Function
+        async function handleLogout() {
+            try {
+                await logoutUser();
+                window.location.href = '../login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                alert('Error logging out');
+            }
+        }
+
+        // Real-time Booking Listener
+        let bookingUnsubscribe = null;
+
+        function subscribeToUserBookings(uid) {
+            // Unsubscribe from previous listener if exists
+            if (bookingUnsubscribe) {
+                bookingUnsubscribe();
+            }
+
+            console.log('📡 Subscribing to booking updates for:', uid);
+            const tbody = document.getElementById('bookingsTableBody');
+
+            // Real-time listener
+            bookingUnsubscribe = firebaseDB.collection('bookings')
+                .where('userId', '==', uid)
+                //.orderBy('createdAt', 'desc') // Removed to prevent index error
+                .onSnapshot((snapshot) => {
+                    const bookings = [];
+                    snapshot.forEach(doc => {
+                        bookings.push({ id: doc.id, ...doc.data() });
+                    });
+
+                    // Client-side sort
+                    bookings.sort((a, b) => {
+                        const getMillis = (t) => t ? (t.toMillis ? t.toMillis() : (t.seconds ? t.seconds * 1000 : new Date(t).getTime())) : 0;
+                        return getMillis(b.createdAt) - getMillis(a.createdAt);
+                    });
+
+                    if (bookings.length > 0) {
+                        console.log(`🔄 Real-time update: ${bookings.length} bookings`);
+                        displayBookings(bookings);
+                    } else {
+                        // Optional: Handle empty state update if needed
+                        if (tbody && (!bookings || bookings.length === 0)) {
+                            // Only if we want to show 'No bookings' explicitly here, 
+                            // but loadUserData handles the initial empty state fine.
+                        }
+                    }
+                }, (error) => {
+                    console.error('❌ Error listening to bookings:', error);
+                });
+        }
+
+        // Load User Data Function (extracted to be reusable)
+        async function loadUserData(uid) {
+            try {
+                // Get user data from Firestore
+                const userDoc = await firebaseDB.collection('users').doc(uid).get();
+
+                if (userDoc.exists) {
+                    userData = userDoc.data();
+                    console.log('✅ User data loaded:', userData);
+
+                    // Update welcome message
+                    const welcomeText = document.querySelector('header h2');
+                    if (welcomeText) {
+                        welcomeText.textContent = `Welcome Back, ${userData.firstName}!`;
+                    }
+
+                    // Update profile name
+                    const profileName = document.querySelector('header .text-sm.font-semibold');
+                    if (profileName) {
+                        profileName.textContent = `${userData.firstName} ${userData.lastName}`;
+                    }
+
+                    // Update profile avatar
+                    const profileImg = document.querySelector('header img[alt="Profile"]');
+                    if (profileImg) {
+                        profileImg.src = `https://ui-avatars.com/api/?name=${userData.firstName}+${userData.lastName}&background=6366f1&color=fff`;
+                    }
+
+                    // Update wallet balance
+                    const walletElements = document.querySelectorAll('.text-3xl.font-bold.text-gray-800');
+                    if (walletElements[0]) {
+                        walletElements[0].textContent = `₹${userData.walletBalance || 0}`;
+                    }
+
+                    // Update total bookings
+                    if (walletElements[1]) {
+                        walletElements[1].textContent = userData.totalBookings || 0;
+                    }
+
+                    // Clear fake booking rows and show "No bookings yet"
+                    const bookingsTableBody = document.getElementById('bookingsTableBody');
+                    if (bookingsTableBody && (!userData.totalBookings || userData.totalBookings === 0)) {
+                        bookingsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan="6" class="py-12 text-center">
+                                    <i class="fas fa-calendar-times text-4xl text-gray-300 mb-4"></i>
+                                    <p class="text-gray-500 font-semibold">No bookings yet</p>
+                                    <p class="text-sm text-gray-400 mt-2">Book your first service to get started!</p>
+                                    <button onclick="openBookingModal()" class="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                                        Book Now
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }
+
+                    // Hide active booking card if no bookings
+                    const activeBookingCard = document.getElementById('activeBookingCard');
+                    if (activeBookingCard && (!userData.totalBookings || userData.totalBookings === 0)) {
+                        activeBookingCard.style.display = 'none';
+                    }
+
+                    // Start real-time booking updates
+                    subscribeToUserBookings(uid);
+
+                    console.log('✅ Dashboard updated with user data');
+                } else {
+                    console.log('⚠️ User document not found');
+                    // Use basic data from auth
+                    const welcomeText = document.querySelector('header h2');
+                    if (welcomeText) {
+                        const name = currentUser.displayName ? currentUser.displayName.split(' ')[0] : 'User';
+                        welcomeText.textContent = `Welcome Back, ${name}!`;
+                    }
+                }
+            } catch (error) {
+                console.error('❌ Error loading user data:', error);
+            }
+        }
+
+        // Load User Bookings from Firestore
+        async function loadUserBookings(uid) {
+            try {
+                console.log('📥 Loading bookings for user:', uid);
+
+                const result = await getUserBookings(uid, 10);
+
+                if (result.success && result.bookings.length > 0) {
+                    console.log(`✅ Found ${result.bookings.length} bookings`);
+                    displayBookings(result.bookings);
+                } else {
+                    console.log('ℹ️ No bookings found');
+                    // "No bookings yet" message is already shown by loadUserData
+                }
+            } catch (error) {
+                console.error('❌ Error loading bookings:', error);
+            }
+        }
+
+        // Display Bookings in Table
+        function displayBookings(bookings) {
+            const tbody = document.getElementById('bookingsTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            bookings.forEach(booking => {
+                const row = createBookingRow(booking);
+                tbody.appendChild(row);
+            });
+        }
+
+        // Create Booking Table Row
+        function createBookingRow(booking) {
+            const row = document.createElement('tr');
+            row.className = 'border-b border-gray-100 hover:bg-gray-50';
+
+            const statusColors = {
+                'pending': 'bg-yellow-100 text-yellow-800',
+                'assigned': 'bg-blue-100 text-blue-800',
+                'in-progress': 'bg-blue-100 text-blue-800',
+                'completed': 'bg-green-100 text-green-800',
+                'cancelled': 'bg-red-100 text-red-800'
+            };
+
+            const serviceIcons = {
+                'cleaning': 'fa-broom',
+                'ac-repair': 'fa-wind',
+                'plumbing': 'fa-toilet',
+                'electrical': 'fa-bolt',
+                'painting': 'fa-paint-roller',
+                'carpentry': 'fa-hammer',
+                'pest-control': 'fa-bug',
+                'appliance-repair': 'fa-blender'
+            };
+
+            const icon = serviceIcons[booking.serviceId] || 'fa-wrench';
+            const statusClass = statusColors[booking.status] || 'bg-gray-100 text-gray-800';
+            const statusText = booking.status.charAt(0).toUpperCase() + booking.status.slice(1).replace('-', ' ');
+
+            row.innerHTML = `
+                <td class="py-4 px-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                            <i class="fas ${icon} text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-800">${booking.service || 'Service'}</p>
+                            <p class="text-xs text-gray-500">${booking.duration || '1 hour'}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="py-4 px-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="https://ui-avatars.com/api/?name=${booking.helperName || 'Helper'}&background=random" 
+                             class="w-8 h-8 rounded-full" alt="Helper">
+                        <span class="text-sm text-gray-700">${booking.helperName || 'Assigning...'}</span>
+                    </div>
+                </td>
+                <td class="py-4 px-4 text-sm text-gray-600">${formatBookingDate(booking.scheduledDate)}</td>
+                <td class="py-4 px-4 font-semibold text-gray-800">₹${booking.amount || 0}</td>
+                <td class="py-4 px-4">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold ${statusClass}">
+                        ${statusText}
+                    </span>
+                </td>
+                <td class="py-4 px-4">
+                    <button class="text-indigo-600 hover:text-indigo-800" onclick="viewBookingDetails('${booking.id}')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </td>
+            `;
+
+            return row;
+        }
+
+        // Format Booking Date
+        function formatBookingDate(timestamp) {
+            if (!timestamp) return 'Not scheduled';
+
+            let date;
+            if (timestamp.toDate) {
+                // Firestore Timestamp
+                date = timestamp.toDate();
+            } else if (timestamp instanceof Date) {
+                date = timestamp;
+            } else if (timestamp.seconds) {
+                // Firestore Timestamp object
+                date = new Date(timestamp.seconds * 1000);
+            } else {
+                date = new Date(timestamp);
+            }
+
+            const options = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // View Booking Details (placeholder)
+        function viewBookingDetails(bookingId) {
+            alert('Booking Details\n\nBooking ID: ' + bookingId + '\n\nDetailed view coming soon!');
+        }
+
+        // Check Authentication and Load Data
+        firebaseAuth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                console.log('❌ No user logged in, redirecting...');
+                window.location.href = '../login.html';
+            } else {
+                console.log('✅ User authenticated:', user.email);
+                currentUser = user;
+
+                // Load user data using the reusable function
+                await loadUserData(user.uid);
+            }
+        });
+
+        // Add logout click handler
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find logout button and add click handler
+            const logoutLinks = document.querySelectorAll('a');
+            logoutLinks.forEach(link => {
+                if (link.textContent.includes('Logout')) {
+                    link.onclick = function (e) {
+                        e.preventDefault();
+                        handleLogout();
+                    };
+                }
+            });
+        });
+    </script>
+
+    <script src="../js/user-sidebar.js"></script>
+</body>
+
+</html>

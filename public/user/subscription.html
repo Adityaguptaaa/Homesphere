@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription - HomeSphere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-64 bg-white shadow-lg fixed left-0 top-0 bottom-0 overflow-y-auto">
+            <div class="p-6">
+                <h1
+                    class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    HomeSphere</h1>
+                <p class="text-xs text-gray-500 mt-1">15-Min Smart Service</p>
+            </div>
+            <nav class="px-4 space-y-2">
+                <a href="dashboard.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100"><i
+                        class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="booking.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100"><i
+                        class="fas fa-calendar-check"></i><span>My Bookings</span></a>
+                <a href="wallet.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100"><i
+                        class="fas fa-wallet"></i><span>Wallet</span></a>
+                <a href="subscription.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white"><i
+                        class="fas fa-crown"></i><span>Subscription</span></a>
+
+                <a href="chatbot.html"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100"><i
+                        class="fas fa-robot"></i><span>AI Assistant</span></a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 ml-64 overflow-y-auto">
+            <header class="bg-white shadow-sm sticky top-0 z-10">
+                <div class="flex items-center justify-between px-8 py-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">My Subscription</h2>
+                        <p class="text-sm text-gray-500">Upgrade to unlock premium benefits</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff"
+                                id="userProfileImg" alt="Profile" class="w-10 h-10 rounded-full">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800" id="userProfileName">Loading...</p>
+                                <span id="planBadge"
+                                    class="px-2 py-0.5 rounded-full text-xs font-bold bg-gray-200 text-gray-600">Free
+                                    Plan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-8">
+                <!-- Current Plan Status -->
+                <div id="currentPlanCard"
+                    class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-gray-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gray-100 rounded-full -mr-16 -mt-16 opacity-50">
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-lg font-semibold text-gray-500 uppercase tracking-widest mb-2">Current Plan</h3>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-4" id="planTitle">Free Member</h2>
+                        <p class="text-gray-600 max-w-xl mb-6">You are currently on the basic plan. Upgrade to Premium
+                            to enjoy instant bookings, priority support, and exclusive discounts.</p>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i> Basic
+                                Support</div>
+                            <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>
+                                Standard Booking</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upgrade Options -->
+                <div class="grid md:grid-cols-2 gap-8" id="upgradeSection">
+                    <!-- Free Plan Card (Comparison) -->
+                    <div class="bg-white rounded-2xl p-8 border border-gray-200 opacity-70">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Basic</h3>
+                        <p class="text-3xl font-bold text-gray-400 mb-6">Free</p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center text-gray-600"><i class="fas fa-check text-green-500 mr-3"></i>
+                                Pay per booking</li>
+                            <li class="flex items-center text-gray-600"><i class="fas fa-check text-green-500 mr-3"></i>
+                                Standard support</li>
+                            <li class="flex items-center text-gray-400"><i class="fas fa-times mr-3"></i> No priority
+                                booking</li>
+                            <li class="flex items-center text-gray-400"><i class="fas fa-times mr-3"></i> No discounts
+                            </li>
+                        </ul>
+                        <button disabled
+                            class="w-full py-3 rounded-xl border border-gray-300 text-gray-400 font-bold cursor-not-allowed">Current
+                            Plan</button>
+                    </div>
+
+                    <!-- Premium Plan Card -->
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl p-8 text-white relative transform hover:scale-105 transition-all">
+                        <div
+                            class="absolute top-0 right-0 bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">
+                            POPULAR</div>
+                        <h3 class="text-xl font-bold mb-2">HomeSphere Premium</h3>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-4xl font-bold">₹499</span>
+                            <span class="text-sm text-gray-400 ml-2">/ month</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center">
+                                <div class="bg-green-500 rounded-full p-1 mr-3"><i
+                                        class="fas fa-check text-xs text-white"></i></div> Priority Booking (Instant)
+                            </li>
+                            <li class="flex items-center">
+                                <div class="bg-green-500 rounded-full p-1 mr-3"><i
+                                        class="fas fa-check text-xs text-white"></i></div> 10% Discount on all services
+                            </li>
+                            <li class="flex items-center">
+                                <div class="bg-green-500 rounded-full p-1 mr-3"><i
+                                        class="fas fa-check text-xs text-white"></i></div> Premium Support 24/7
+                            </li>
+                            <li class="flex items-center">
+                                <div class="bg-green-500 rounded-full p-1 mr-3"><i
+                                        class="fas fa-check text-xs text-white"></i></div> Extend Warranty (+30 days)
+                            </li>
+                        </ul>
+                        <button onclick="subscribePremium()" id="subscribeBtn"
+                            class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 py-4 rounded-xl font-bold hover:shadow-lg hover:from-yellow-300 hover:to-orange-400 transition-all">Upgrade
+                            Now</button>
+                        <p class="text-xs text-gray-400 text-center mt-3">Deducted from wallet balance</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/user-subscription.js"></script>
+
+    <script src="../js/user-sidebar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeSphere - 15-Min Smart Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1
+                        class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        HomeSphere
+                    </h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-indigo-600 font-medium">Features</a>
+                    <a href="#services" class="text-gray-700 hover:text-indigo-600 font-medium">Services</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-indigo-600 font-medium">Pricing</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium">About</a>
+                    <a href="login.html" class="text-gray-700 hover:text-indigo-600 font-medium">Login</a>
+                    <a href="register.html"
+                        class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transition-all">
+                        Get Started
+                    </a>
+                </div>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div
+                        class="inline-block bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                        <i class="fas fa-bolt mr-2"></i>AI-Powered Service Platform
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Get Help in
+                        <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                            15 Minutes
+                        </span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        From cleaning to repairs, book trusted helpers instantly with AI-powered matching and
+                        transparent pricing.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="register.html"
+                            class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105 text-center">
+                            <i class="fas fa-rocket mr-2"></i>Book Now
+                        </a>
+                        <a href="#services"
+                            class="bg-white text-gray-800 px-8 py-4 rounded-xl font-bold text-lg border-2 border-gray-200 hover:border-indigo-600 transition-all text-center">
+                            <i class="fas fa-play-circle mr-2"></i>See How It Works
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-12">
+                        <div>
+                            <h3 class="text-3xl font-bold text-indigo-600">50K+</h3>
+                            <p class="text-gray-600 text-sm">Happy Customers</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold text-indigo-600">5K+</h3>
+                            <p class="text-gray-600 text-sm">Verified Helpers</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold text-indigo-600">4.8★</h3>
+                            <p class="text-gray-600 text-sm">Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-8 shadow-2xl">
+                        <div class="bg-white rounded-2xl p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-gray-800">Quick Booking</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                                    <i class="fas fa-broom text-indigo-600 text-xl"></i>
+                                    <span class="font-semibold text-gray-700">Deep Cleaning</span>
+                                    <span class="ml-auto text-indigo-600 font-bold">₹899</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                                    <i class="fas fa-wrench text-green-600 text-xl"></i>
+                                    <span class="font-semibold text-gray-700">AC Repair</span>
+                                    <span class="ml-auto text-green-600 font-bold">₹649</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                                    <i class="fas fa-toilet text-purple-600 text-xl"></i>
+                                    <span class="font-semibold text-gray-700">Plumbing</span>
+                                    <span class="ml-auto text-purple-600 font-bold">₹499</span>
+                                </div>
+                            </div>
+                            <button
+                                class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-xl font-bold">
+                                View All Services
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Choose HomeSphere?</h2>
+                <p class="text-xl text-gray-600">Experience the future of home services</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">15-Min Arrival</h3>
+                    <p class="text-gray-600">AI-powered helper matching ensures someone reaches you in just 15 minutes.
+                    </p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">100% Verified</h3>
+                    <p class="text-gray-600">All helpers are background-checked and verified for your safety.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-tag text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Transparent Pricing</h3>
+                    <p class="text-gray-600">No hidden charges. See exact pricing before you book.</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-pink-600 to-rose-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">AI Chatbot</h3>
+                    <p class="text-gray-600">Book services naturally by chatting with our AI assistant.</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-wallet text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Digital Wallet</h3>
+                    <p class="text-gray-600">Cashless payments with instant refunds and cashback rewards.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-purple-600 to-violet-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-star text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Quality Assured</h3>
+                    <p class="text-gray-600">Rate and review every service. We maintain high quality standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+                <p class="text-xl text-gray-600">Everything you need for your home</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-broom text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Cleaning</h3>
+                    <p class="text-sm text-gray-600">Deep cleaning, regular cleaning</p>
+                    <p class="text-indigo-600 font-bold mt-3">From ₹499</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-wrench text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">AC Repair</h3>
+                    <p class="text-sm text-gray-600">Installation, servicing, repair</p>
+                    <p class="text-green-600 font-bold mt-3">From ₹399</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-toilet text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Plumbing</h3>
+                    <p class="text-sm text-gray-600">Leak repair, installation</p>
+                    <p class="text-purple-600 font-bold mt-3">From ₹299</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-amber-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Electrical</h3>
+                    <p class="text-sm text-gray-600">Wiring, fixture installation</p>
+                    <p class="text-amber-600 font-bold mt-3">From ₹349</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-paint-roller text-pink-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Painting</h3>
+                    <p class="text-sm text-gray-600">Interior, exterior painting</p>
+                    <p class="text-pink-600 font-bold mt-3">From ₹599</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-hammer text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Carpentry</h3>
+                    <p class="text-sm text-gray-600">Furniture repair, installation</p>
+                    <p class="text-blue-600 font-bold mt-3">From ₹449</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-fire-extinguisher text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Pest Control</h3>
+                    <p class="text-sm text-gray-600">Complete pest elimination</p>
+                    <p class="text-red-600 font-bold mt-3">From ₹799</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-leaf text-teal-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Gardening</h3>
+                    <p class="text-sm text-gray-600">Lawn care, plant maintenance</p>
+                    <p class="text-teal-600 font-bold mt-3">From ₹399</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Subscription Plans</h2>
+                <p class="text-xl text-gray-600">Save more with our monthly plans</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Basic</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">₹499</span>
+                        <span class="text-gray-600">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            5 Services per month
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            10% Discount
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            Priority Support
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-gray-100 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-200 transition-all">
+                        Choose Plan
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div
+                    class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 text-white transform scale-105 shadow-2xl">
+                    <div
+                        class="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-xs font-semibold inline-block mb-4">
+                        MOST POPULAR
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Premium</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">₹999</span>
+                        <span class="opacity-90">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check mr-3"></i>
+                            12 Services per month
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check mr-3"></i>
+                            20% Discount
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check mr-3"></i>
+                            24/7 Priority Support
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check mr-3"></i>
+                            Free Cancellation
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-white text-indigo-600 py-3 rounded-xl font-bold hover:shadow-lg transition-all">
+                        Choose Plan
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-900">₹1,999</span>
+                        <span class="text-gray-600">/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            Unlimited Services
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            30% Discount
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            Dedicated Manager
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-600 mr-3"></i>
+                            Custom Solutions
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-xl font-bold hover:shadow-lg transition-all">
+                        Choose Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-indigo-600 to-purple-600">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+            <p class="text-xl mb-8 opacity-90">Join thousands of happy customers using HomeSphere</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html"
+                    class="bg-white text-indigo-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+                    Sign Up Now
+                </a>
+                <a href="login.html"
+                    class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-indigo-600 transition-all">
+                    Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <h3
+                    class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent mb-4">
+                    HomeSphere
+                </h3>
+                <p class="text-gray-400 text-sm">15-Min Smart Service for all your home needs.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Services</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-white">Cleaning</a></li>
+                    <li><a href="#" class="hover:text-white">Plumbing</a></li>
+                    <li><a href="#" class="hover:text-white">Electrical</a></li>
+                    <li><a href="#" class="hover:text-white">Painting</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Company</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-white">About Us</a></li>
+                    <li><a href="#" class="hover:text-white">Careers</a></li>
+                    <li><a href="#" class="hover:text-white">Contact</a></li>
+                    <li><a href="#" class="hover:text-white">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Connect</h4>
+                <div class="flex space-x-4">
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-all">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-all">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-all">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-all">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 HomeSphere. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+// Cleanliness score placeholder

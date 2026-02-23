@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Safety - Test Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-red-400">🚨 Admin Safety Dashboard - Test</h1>
+
+        <div class="bg-gray-800 rounded-xl p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4 text-white">Quick Test Instructions</h2>
+            <ol class="list-decimal list-inside space-y-2 text-gray-300">
+                <li>Make sure you're logged in to Firebase</li>
+                <li>Your user account must have <code class="bg-gray-700 px-2 py-1 rounded">role: "admin"</code> in
+                    Firestore</li>
+                <li>If you don't have admin role, the dashboard will redirect to login</li>
+                <li>Click the button below to set your account as admin (one-time setup)</li>
+            </ol>
+        </div>
+
+        <div class="bg-yellow-900 bg-opacity-30 border border-yellow-500 rounded-xl p-6 mb-6">
+            <h3 class="text-lg font-bold mb-3 text-yellow-400">
+                <i class="fas fa-exclamation-triangle mr-2"></i>Set Admin Role
+            </h3>
+            <p class="text-gray-300 mb-4">Click this button to set yourself as admin in Firestore:</p>
+            <button id="setAdminBtn" onclick="setAdminRole()"
+                class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold">
+                <i class="fas fa-user-shield mr-2"></i>Make Me Admin
+            </button>
+            <p id="adminStatus" class="mt-4 text-sm"></p>
+        </div>
+
+        <div class="bg-green-900 bg-opacity-30 border border-green-500 rounded-xl p-6 mb-6">
+            <h3 class="text-lg font-bold mb-3 text-green-400">
+                <i class="fas fa-check-circle mr-2"></i>Verify Setup
+            </h3>
+            <div id="verificationResults" class="space-y-2">
+                <p class="text-gray-400">Checking setup...</p>
+            </div>
+        </div>
+
+        <div class="bg-blue-900 bg-opacity-30 border border-blue-500 rounded-xl p-6">
+            <h3 class="text-lg font-bold mb-3 text-blue-400">
+                <i class="fas fa-link mr-2"></i>Navigation
+            </h3>
+            <div class="space-y-2">
+                <a href="safety.html"
+                    class="block bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold text-center">
+                    <i class="fas fa-shield-alt mr-2"></i>Go to Safety Dashboard
+                </a>
+                <a href="../user/safety.html"
+                    class="block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold text-center">
+                    <i class="fas fa-user mr-2"></i>Go to User Safety Page
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+
+    <script>
+        let currentUser = null;
+
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (!user) {
+                document.getElementById('verificationResults').innerHTML = `
+                    <p class="text-red-400"><i class="fas fa-times-circle mr-2"></i>Not logged in</p>
+                    <p class="text-gray-400 text-sm">Please <a href="../login.html" class="underline">login first</a></p>
+                `;
+                return;
+            }
+
+            currentUser = user;
+            await verifySetup();
+        });
+
+        async function verifySetup() {
+            const results = document.getElementById('verificationResults');
+            let html = '';
+
+            // Check 1: User logged in
+            html += `<p class="text-green-400"><i class="fas fa-check-circle mr-2"></i>Logged in as: ${currentUser.email}</p>`;
+
+            // Check 2: User document exists
+            try {
+                const userDoc = await firebase.firestore().collection('users').doc(currentUser.uid).get();
+                if (userDoc.exists) {
+                    const userData = userDoc.data();
+                    html += `<p class="text-green-400"><i class="fas fa-check-circle mr-2"></i>User document exists</p>`;
+
+                    // Check 3: Admin role
+                    if (userData.role === 'admin') {
+                        html += `<p class="text-green-400"><i class="fas fa-check-circle mr-2"></i>Admin role: <strong>YES ✅</strong></p>`;
+                        html += `<p class="text-purple-400 mt-4"><i class="fas fa-rocket mr-2"></i>You're all set! Click "Go to Safety Dashboard" above.</p>`;
+                    } else {
+                        html += `<p class="text-yellow-400"><i class="fas fa-exclamation-triangle mr-2"></i>Admin role: NO (current: ${userData.role || 'user'})</p>`;
+                        html += `<p class="text-gray-400 text-sm">Click "Make Me Admin" button above to fix this.</p>`;
+                    }
+                } else {
+                    html += `<p class="text-red-400"><i class="fas fa-times-circle mr-2"></i>User document not found</p>`;
+                }
+            } catch (error) {
+                html += `<p class="text-red-400"><i class="fas fa-times-circle mr-2"></i>Error: ${error.message}</p>`;
+            }
+
+            // Check 4: Collections exist
+            try {
+                const alertsCount = await firebase.firestore().collection('panicAlerts').get();
+                html += `<p class="text-green-400"><i class="fas fa-check-circle mr-2"></i>Panic alerts collection exists (${alertsCount.size} alerts)</p>`;
+            } catch (error) {
+                html += `<p class="text-yellow-400"><i class="fas fa-exclamation-triangle mr-2"></i>Panic alerts: none yet</p>`;
+            }
+
+            results.innerHTML = html;
+        }
+
+        async function setAdminRole() {
+            if (!currentUser) {
+                alert('Please login first');
+                return;
+            }
+
+            const btn = document.getElementById('setAdminBtn');
+            const status = document.getElementById('adminStatus');
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Setting admin role...';
+
+                await firebase.firestore().collection('users').doc(currentUser.uid).set({
+                    role: 'admin'
+                }, { merge: true });
+
+                status.innerHTML = '<p class="text-green-400"><i class="fas fa-check-circle mr-2"></i>Success! You are now an admin. Refresh the page.</p>';
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Admin Role Set!';
+                btn.classList.remove('bg-purple-600', 'hover:bg-purple-700');
+                btn.classList.add('bg-green-600');
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } catch (error) {
+                console.error('Error setting admin role:', error);
+                status.innerHTML = `<p class="text-red-400"><i class="fas fa-times-circle mr-2"></i>Error: ${error.message}</p>`;
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-user-shield mr-2"></i>Make Me Admin';
+            }
+        }
+    </script>
+</body>
+
+</html>
